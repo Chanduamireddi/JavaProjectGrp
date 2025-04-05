@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Place Order</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Place New Order</h4>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/placeOrder}" th:object="${order}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Ticker Symbol</label>
+                    <input type="text" class="form-control" th:field="*{tickerSymbol}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Quantity</label>
+                    <input type="number" class="form-control" th:field="*{quantity}" min="1" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Order Amount</label>
+                    <input type="number" step="0.01" class="form-control" th:field="*{orderAmt}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Order Type</label>
+                    <select class="form-select" th:field="*{orderType_BuyOrSell}">
+                        <option value="BUY">BUY</option>
+                        <option value="SELL">SELL</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" th:field="*{username}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Add More Info</label>
+                    <input type="text" class="form-control" th:field="*{addMoreAsRequired}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Attribute</label>
+                    <input type="text" class="form-control" th:field="*{attribute}">
+                </div>
+
+                <button type="submit" class="btn btn-success">Submit</button>
+                <a th:href="@{/}" class="btn btn-secondary ms-2">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

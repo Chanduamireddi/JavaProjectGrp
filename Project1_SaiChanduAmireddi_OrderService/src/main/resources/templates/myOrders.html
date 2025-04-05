@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Orders</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h3 class="text-center text-primary">My Orders</h3>
+
+    <!-- Success Message -->
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show mt-4" role="alert">
+        <strong th:text="${success}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Error Message -->
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+        <strong th:text="${error}"></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <table class="table table-bordered table-striped mt-4">
+        <thead class="table-dark">
+        <tr>
+            <th>#</th>
+            <th>Ticker Symbol</th>
+            <th>Quantity</th>
+            <th>Order Amount ($)</th>
+            <th>Order Type</th>
+            <th>Username</th>
+            <th>Order Date</th>
+            <th>Attribute</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order, iterStat : ${orders}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${order.tickerSymbol}"></td>
+            <td th:text="${order.quantity}"></td>
+            <td th:text="${order.orderAmt}"></td>
+            <td th:text="${order.orderType_BuyOrSell}"></td>
+            <td th:text="${order.username}"></td>
+            <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${order.attribute}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="text-center mt-4">
+        <a th:href="@{/}" class="btn btn-secondary">Back Home</a>
+    </div>
+</div>
+</body>
+</html>
